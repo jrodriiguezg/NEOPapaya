@@ -2,3 +2,6 @@ python-vlc
 opencv-python
 mediapipe
 numpy
+vosk 
+Pillow 
+psutil
