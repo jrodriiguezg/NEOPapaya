@@ -5,3 +5,7 @@ numpy
 vosk 
 Pillow 
 psutil
+pyaudio
+thefuzz
+dateparser 
+
