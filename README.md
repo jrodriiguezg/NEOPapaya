@@ -1,7 +1,7 @@
 # COLEGA
 **C.O.L.E.G.A.** (COpiloto de Lenguaje para Entornos de Grupo y Administración)
 
-> Anteriormente conocido como **OpenKompai Nano**
+> Este sistema se basa en un proyecto anterior https://github.com/jrodriiguezg/OpenKompai_nano
 
 COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse localmente en hardware modesto. Combina la eficiencia de un sistema basado en reglas para el control del sistema y domótica, con la inteligencia de un LLM local (**Gemma 2B**) para conversaciones naturales y razonamiento.
 
