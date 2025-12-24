@@ -58,9 +58,9 @@ The core (`NeoCore.py`) orchestrates several independent modules:
 
 ```bash
 # Clone the repository and switch to testing branch
-git clone https://github.com/jrodriiguezg/NEO.git
-cd NEO
-git checkout testing
+git clone https://github.com/jrodriiguezg/COLEGA.git
+cd COLEGA
+git checkout testing && git pull
 
 # Run the native installer (User Service Mode)
 # This will download MANGO T5, Vosk, Piper, and set up the systemd service.
@@ -128,9 +128,9 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 
 ```bash
 # Clonar y cambiar a rama testing
-git clone https://github.com/jrodriiguezg/NEO.git
-cd NEO
-git checkout testing
+git clone https://github.com/jrodriiguezg/COLEGA.git
+cd COLEGA
+git checkout testing && git pull
 
 # Ejecutar instalador nativo (Modo Servicio de Usuario)
 # Esto descargará MANGO T5, Vosk, Piper y configurará systemd.
