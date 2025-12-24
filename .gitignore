@@ -61,6 +61,7 @@ source/
 roadmap.md
 test_pipeline.py
 COLEGA.code-workspace
+docs/
 
 # Tests
 tests/
