@@ -56,7 +56,7 @@ docker/
 MANGOT5/
 MANGOT5.old/
 config/certs/
-
+FANN/
 source/
 roadmap.md
 test_pipeline.py
