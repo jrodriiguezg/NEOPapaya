@@ -4,9 +4,22 @@ import sys
 import json
 import logging
 
+# --- FIX PYTHON PATH ---
+# Must happen BEFORE importing any local modules
+if __name__ == "__main__":
+    # If run from resources/tools, go up to root
+    if os.getcwd().endswith("tools"):
+        os.chdir("../../")
+        print(f"Changed working directory to: {os.getcwd()}")
+    
+    # Add current directory to path so we can import 'modules'
+    if os.getcwd() not in sys.path:
+        sys.path.append(os.getcwd())
+
 try:
     import vosk
     import pyaudio
+    # Import local modules AFTER fixing path
     from modules.config_manager import ConfigManager
 except ImportError as e:
     print(f"CRITICAL ERROR: Missing dependency: {e}")
@@ -86,18 +99,17 @@ if __name__ == "__main__":
     print("   NEO SERVICE DIAGNOSTIC TOOL")
     print("==========================================")
     
-    # Ensure we assume we are at project root if run from there
-    if os.getcwd().endswith("tools"):
-        os.chdir("../../")
-        print(f"Changed working directory to: {os.getcwd()}")
-        sys.path.append(os.getcwd())
+    # Path is already fixed at top, now we run checks
     
-    cfg, path, idx = check_config()
-    model = check_model(path)
-    if model:
-        check_audio_input(model, idx)
-    else:
-        print("SKIPPING AUDIO TEST due to model failure.")
+    try:
+        cfg, path, idx = check_config()
+        model = check_model(path)
+        if model:
+            check_audio_input(model, idx)
+        else:
+            print("SKIPPING AUDIO TEST due to model failure.")
+    except Exception as e:
+         print(f"UNHANDLED ERROR: {e}")
         
     print("\n==========================================")
     print("Diagnostic Complete.")
