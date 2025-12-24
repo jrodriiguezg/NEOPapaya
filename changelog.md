@@ -209,7 +209,7 @@ Esta versión representa una reescritura mayor del sistema, cambiando completame
 
 ## [1.0.0] - 2024-05-10 (Legacy - Elderly Care)
 
-Versión original del proyecto presentada como Trabajo de Fin de Grado.
+Versión original del proyecto presentado como propuesta a hackaton.
 
 ### Añadido
 
