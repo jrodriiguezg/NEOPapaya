@@ -4,11 +4,28 @@ Todas las modificaciones notables en el proyecto **Neo Nano** se documentarán e
 
 El formato se basa en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a Versionado Semántico.
 
-## [2.5.0] - Work in Progress
+## [2.5.0-testing] - 2024-12-24
 
-### ✨ Features
-- **Cron Manager**: Nueva interfaz web en `/tasks` para programar tareas recurrentes (backups, reinicios) usando sintaxis cron.
-- **Scheduler API**: Endpoints REST completos para gestión de jobs (`/api/tasks/list`, `/add`, `/delete`).
+Versión de pruebas con nuevas capacidades autónomas y herramientas para desarrolladores.
+
+### ✨ Nuevas Características
+- **Self-Healing System**: Módulo `HealthManager` que monitorea servicios (`cron`, `mosquitto`, `nginx`, etc.) y los reinicia automáticamente tras un fallo.
+  - **Smart Discovery**: Detección automática de servicios instalados para evitar falsos positivos.
+  - **Análisis Predictivo**: Detección de patrones de inestabilidad basada en el historial de incidentes.
+- **SysAdmin AI (MANGO T5)**:
+  - Integración completa del modelo **MANGO T5 770M** (Hugging Face) para traducción natural a Bash.
+  - **Downloader Inteligente**: Script `download_mango_model.py` con soporte de resume y caché local.
+- **Cron Manager**:
+  - Interfaz web `/tasks` para gestión visual de tareas programadas.
+  - API REST completa para el scheduler (`/api/tasks/*`).
+- **Instalador Inteligente**:
+  - `install_wizard.sh` ahora detecta automáticamente el SO (Debian vs Fedora) y elige el instalador adecuado (Nativo vs Distrobox).
+  - Descarga automática de modelos (Mango T5) durante la instalación.
+
+### 🐛 Correcciones
+- Limpieza de código muerto en `web_admin.py`.
+- Corrección de dependencias faltantes en `setup_distrobox.sh`.
+
 
 ## [2.4.0] - 2025-12-20 (Self-Healing & UX Upgrade)
 
