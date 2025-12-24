@@ -374,6 +374,11 @@ chmod 755 logs
 mkdir -p "$SERVICE_DIR"
 chown -R $USER_NAME:$USER_NAME "$USER_HOME/.config"
 
+# --- PERMISOS DE GRUPO ---
+echo "Añadiendo a $USER_NAME a los grupos de audio y video..."
+sudo usermod -a -G audio,video,tty $USER_NAME || true
+
+
 # --- FIX SELINUX (Fedora/RHEL) ---
 if command -v getenforce &> /dev/null && [ "$(getenforce)" != "Disabled" ]; then
     if command -v chcon &> /dev/null; then
