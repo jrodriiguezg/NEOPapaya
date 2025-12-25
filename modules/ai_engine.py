@@ -72,7 +72,7 @@ class AIEngine:
             output = self.llm(
                 prompt,
                 max_tokens=max_tokens,
-                stop=["<end_of_turn>", "<|eot_id|>", "<|end_of_text|>"], # Add Llama 3 stop tokens
+                stop=["<end_of_turn>"], # Gemma 2 stop token
                 echo=False,
                 temperature=0.7,
                 top_p=0.9,
@@ -95,7 +95,7 @@ class AIEngine:
             stream = self.llm(
                 prompt,
                 max_tokens=max_tokens,
-                stop=["<end_of_turn>", "<|eot_id|>", "<|end_of_text|>"], # Add Llama 3 stop tokens
+                stop=["<end_of_turn>"], # Gemma 2 stop token
                 echo=False,
                 temperature=0.7,
                 top_p=0.9,

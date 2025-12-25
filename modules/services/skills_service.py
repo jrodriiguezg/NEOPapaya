@@ -55,7 +55,14 @@ from modules.skills.media import MediaSkill
 from modules.skills.organizer import OrganizerSkill
 from modules.skills.ssh import SSHSkill
 from modules.skills.files import FilesSkill
+from modules.skills.files import FilesSkill
 from modules.skills.visual import VisualSkill
+
+# Mango (NL2Bash)
+try:
+    from modules.mango_manager import MangoManager
+except ImportError:
+    MangoManager = None
 
 # Setup Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [SKILLS] - %(levelname)s - %(message)s')
@@ -140,6 +147,13 @@ class SkillsService:
         self.brain.set_ai_engine(self.ai_engine)
         self.chat_manager = ChatManager(self.ai_engine)
         self.chat_manager.brain = self.brain
+        
+        # Initialize Mango
+        self.mango_manager = MangoManager() if MangoManager else None
+        if self.mango_manager:
+            logger.info("MangoManager initialized for Sysadmin duties.")
+        else:
+            logger.warning("MangoManager not available.")
 
     def init_skills(self):
         logger.info("Initializing Skills...")
@@ -290,18 +304,36 @@ class SkillsService:
         logger.info(f"Received unknown intent event: {message}")
         data = message.get('data', {})
         utterance = data.get('utterance', '')
-        if utterance:
-            logger.info(f"Chatting with AI: {utterance}")
-            try:
-                # Use ChatManager
-                response = self.chat_manager.get_response(utterance)
-                logger.info(f"AI Response: {response}")
-                self.bus.emit('speak', {'text': response})
-            except Exception as e:
-                logger.error(f"Error in ChatManager: {e}")
-                self.bus.emit('speak', {'text': "Lo siento, me he quedado en blanco."})
-        else:
-            logger.warning("Unknown intent event received but no utterance found.")
+        
+        if not utterance:
+             logger.warning("Unknown intent event received but no utterance found.")
+             return
+
+        # 1. Try Mango (Sysadmin/Command) First
+        if self.mango_manager and self.mango_manager.is_ready:
+            logger.info(f"Consulting Mango for: {utterance}")
+            command, confidence = self.mango_manager.infer(utterance)
+            
+            # Threshold matches user preference for Mango priority
+            if command and confidence > 0.6: 
+                logger.info(f"Mango identified command: {command} (Conf: {confidence})")
+                self.bus.emit('speak', {'text': f"Entendido, ejecutaré: {command}"})
+                
+                # TODO: Execute command? For now we just acknowledge it as requested.
+                # Ideally we would pass this to a skill that handles execution safely.
+                # self.skills_system.execute_bash(command) 
+                return
+
+        # 2. Fallback to Chat (Gemma)
+        logger.info(f"Chatting with AI: {utterance}")
+        try:
+            # Use ChatManager
+            response = self.chat_manager.get_response(utterance)
+            logger.info(f"AI Response: {response}")
+            self.bus.emit('speak', {'text': response})
+        except Exception as e:
+            logger.error(f"Error in ChatManager: {e}")
+            self.bus.emit('speak', {'text': "Lo siento, me he quedado en blanco."})
 
     def run(self):
         logger.info("Skills Service Started")
