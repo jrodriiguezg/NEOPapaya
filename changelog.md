@@ -4,6 +4,32 @@ Todas las modificaciones notables en el proyecto **Neo Nano** se documentarán e
 
 El formato se basa en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a Versionado Semántico.
 
+## [2.6.0-testing] - 2025-12-26 (Cosmic Web UI & OTA Updates)
+
+Actualización mayor de la interfaz web con un rediseño visual completo y nuevas herramientas de administración.
+
+### ✨ Nuevas Características
+
+- **Neo Web 3.0 (Cosmic Edition)**:
+  - **Rediseño Visual**: Nuevo tema "Cosmic" con soporte nativo para **Modo Oscuro/Claro** y efectos Glassmorphism mejorados.
+  - **Personalización CSS**: Editor integrado en Ajustes para inyectar CSS personalizado y modificar la apariencia del asistente.
+  - **Mobile First**: Explorador de archivos y barra lateral optimizados para tablets y móviles.
+- **System Insights**:
+  - Nueva pestaña **Información** en ajustes que muestra telemetría detallada: Versión del Kernel, Python, Commit de Git y versiones de librerías críticas.
+- **Update Manager**:
+  - Nuevo botón **"Actualizar Neo"** en la sección Acciones.
+  - Endpoint `/api/update` que permite realizar `git pull` y reiniciar el servicio de usuario sin requerir privilegios de root (`sudo`).
+- **Dual Model Support (MANGO)**:
+  - El instalador ahora permite elegir entre **MANGO** (Estable) y **MANGO2** (Experimental/Avanzado).
+  - Por defecto, se seleccionará la versión más reciente (MANGO2) para maximizar las capacidades de SysAdmin.
+- **File Explorer**:
+  - **Búsqueda Instantánea**: Barra de filtro en tiempo real para localizar archivos rápidamente.
+
+### 🐛 Correcciones
+
+- Solucionado el error de permisos al actualizar desde la web (ahora usa el servicio de usuario).
+- Mejorada la gestión de URLs del servidor API en el cliente web.
+
 ## [2.5.0-testing] - 2025-12-24
 
 Versión de pruebas con nuevas capacidades autónomas y herramientas para desarrolladores.

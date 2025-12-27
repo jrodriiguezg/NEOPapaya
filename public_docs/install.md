@@ -45,7 +45,10 @@ Recomendado para servidores, Raspberry Pi Zero/3/4 o mini-PCs que actuarán como
 **Pasos:**
 1. Seleccione la opción 2 en el asistente.
 2. El proceso es similar al completo, pero se optimiza para no requerir recursos gráficos.
-3. El sistema estará disponible en la red local en el puerto 5000 (API).
+3. Durante la instalación, se le pedirá seleccionar la versión del modelo **MANGO**:
+   - **MANGO2 (Recomendado)**: Versión avanzada con mayores conocimientos.
+   - **MANGO (Estable)**: Versión anterior más probada.
+4. El sistema estará disponible en la red local en el puerto 5000 (API).
 
 ### 3. Cliente Web Remoto (Solo Interfaz)
 

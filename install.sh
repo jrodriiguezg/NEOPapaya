@@ -330,9 +330,25 @@ fi
 echo ""
 
 # --- 4.4. DESCARGA DEL MODELO MANGO T5 (NL2BASH) ---
+# --- 4.4. DESCARGA DEL MODELO MANGO T5 (NL2BASH) ---
 echo "[PASO 4.4/5] Descargando modelo MANGO T5 (SysAdmin AI)..."
 if [ -f "resources/tools/download_mango_model.py" ]; then
-    $VENV_DIR/bin/python resources/tools/download_mango_model.py
+    echo "----------------------------------------------------------------"
+    echo "Selecciona la versión del modelo MANGO a instalar:"
+    echo "   1) MANGO2 (Recomendado - Más capaz, soporte avanzado)"
+    echo "   2) MANGO (Estable - Versión anterior)"
+    echo "----------------------------------------------------------------"
+    read -p "Opción [1-2] (Enter para MANGO2): " MANGO_OPT
+    
+    BRANCH="MANGO2"
+    if [ "$MANGO_OPT" == "2" ]; then
+        BRANCH="main"
+        echo "Has seleccionado: MANGO (Estable)"
+    else
+        echo "Has seleccionado: MANGO2 (Recomendado)"
+    fi
+    
+    $VENV_DIR/bin/python resources/tools/download_mango_model.py --branch "$BRANCH"
 else
     echo "ERROR: No se encontró resources/tools/download_mango_model.py"
 fi

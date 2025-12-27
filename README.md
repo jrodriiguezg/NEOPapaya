@@ -23,7 +23,7 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 ### 🌟 New in v2.5.0 (Testing Branch)
 
 *   **🛡️ Self-Healing System**: Proactive "HealthManager" module that detects crashed services (`cron`, `mosquitto`, `nginx`, etc.) and automatically attempts to restart them. It also performs predictive analysis based on system load.
-*   **🥭 SysAdmin AI (MANGO T5)**: Specialized 770M parameter model fine-tuned to translate natural language into `bash` commands, allowing for complex system administration tasks via voice or text.
+*   **🥭 SysAdmin AI (MANGO T5)**: Specialized 770M parameter model fine-tuned to translate natural language into `bash` commands. Use **MANGO2** (default) for advanced capabilities or swap to the stable **MANGO** version during installation.
 *   **🔍 Smart Service Discovery**: Automatically detects which services are installed on the host machine to avoid false alerts.
 *   **📅 Cron Automation**: New task scheduler and Web UI to manage system jobs with cron syntax.
 
@@ -63,7 +63,7 @@ cd COLEGA
 git checkout testing && git pull
 
 # Run the native installer (User Service Mode)
-# This will download MANGO T5, Vosk, Piper, and set up the systemd service.
+# This will download MANGO T5 (prompts for version), Vosk, Piper, and set up the systemd service.
 ./install.sh
 ```
 
@@ -100,7 +100,7 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 ### 🌟 Novedades en v2.5.0 (Rama Testing)
 
 *   **🛡️ Sistema Self-Healing**: Módulo "HealthManager" proactivo que detecta servicios caídos (`cron`, `mosquitto`, `nginx`, etc.) e intenta reiniciarlos automáticamente. También realiza análisis predictivo basado en la carga del sistema.
-*   **🥭 SysAdmin AI (MANGO T5)**: Modelo especializado de 770M parámetros ajustado para traducir lenguaje natural a comandos `bash`, permitiendo administración avanzada del sistema por voz o texto.
+*   **🥭 SysAdmin AI (MANGO T5)**: Modelo especializado de 770M parámetros ajustado para traducir lenguaje natural a comandos `bash`. Usa **MANGO2** (por defecto) para capacidades avanzadas o elige la versión estable **MANGO** durante la instalación.
 *   **🔍 Smart Service Discovery**: Detecta automáticamente qué servicios están instalados en la máquina host para evitar falsas alertas.
 *   **📅 Automatización Cron**: Nueva interfaz Web y gestor para programar tareas del sistema usando sintaxis cron.
 
@@ -133,7 +133,7 @@ cd COLEGA
 git checkout testing && git pull
 
 # Ejecutar instalador nativo (Modo Servicio de Usuario)
-# Esto descargará MANGO T5, Vosk, Piper y configurará systemd.
+# Esto descargará MANGO T5 (solicita versión), Vosk, Piper y configurará systemd.
 ./install.sh
 ```
 
