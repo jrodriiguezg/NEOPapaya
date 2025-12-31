@@ -360,17 +360,17 @@ echo "[PASO 4.4/5] Descargando modelo MANGO T5 (SysAdmin AI)..."
 if [ -f "resources/tools/download_mango_model.py" ]; then
     echo "----------------------------------------------------------------"
     echo "Selecciona la versión del modelo MANGO a instalar:"
-    echo "   1) MANGO2 (Recomendado - Más capaz, soporte avanzado)"
-    echo "   2) MANGO (Estable - Versión anterior)"
+    echo "   1) MANGO (Recomendado - Última versión)"
+    echo "   2) MANGO2 (Legacy - Versión anterior)"
     echo "----------------------------------------------------------------"
-    read -p "Opción [1-2] (Enter para MANGO2): " MANGO_OPT
+    read -p "Opción [1-2] (Enter para MANGO): " MANGO_OPT
     
-    BRANCH="MANGO2"
+    BRANCH="main"
     if [ "$MANGO_OPT" == "2" ]; then
-        BRANCH="main"
-        echo "Has seleccionado: MANGO (Estable)"
+        BRANCH="MANGO2"
+        echo "Has seleccionado: MANGO2 (Legacy)"
     else
-        echo "Has seleccionado: MANGO2 (Recomendado)"
+        echo "Has seleccionado: MANGO (Recomendado)"
     fi
     
     $VENV_DIR/bin/python resources/tools/download_mango_model.py --branch "$BRANCH"

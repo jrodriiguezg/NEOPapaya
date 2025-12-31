@@ -6,7 +6,7 @@ import argparse
 
 def download_mango():
     parser = argparse.ArgumentParser(description="Download MANGO T5 model")
-    parser.add_argument("--branch", type=str, default="MANGO2", help="Model branch to download (default: MANGO2)")
+    parser.add_argument("--branch", type=str, default="main", help="Model branch to download (default: main)")
     args = parser.parse_args()
     
     repo_id = "jrodriiguezg/mango-t5-770m"
