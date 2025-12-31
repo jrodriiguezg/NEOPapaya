@@ -319,7 +319,7 @@ class SkillsService:
                 logger.info(f"Mango identified command: {command} (Conf: {confidence})")
                 
                 if self.sysadmin_manager:
-                    self.bus.emit('speak', {'text': f"Ejecutando: {command}"})
+                    self.bus.emit('speak', {'text': "Ejecutando..."})
                     
                     # Security Check (Basic)
                     forbidden = ["rm ", "mkfs", "dd ", ">", "mv ", "shutdown", "reboot"]
@@ -330,35 +330,72 @@ class SkillsService:
                     success, output = self.sysadmin_manager.run_command(command)
                     if success:
                         # Smart Summary for TTS
-                        lines = output.strip().split('\n')
-                        
-                        if len(output) < 300 and len(lines) <= 5:
-                            # Short enough to read fully
-                            self.bus.emit('speak', {'text': f"Salida: {output}"})
-                        else:
-                            # Too long, read summary
-                            preview = ". ".join(lines[:3]) # Read first 3 lines
-                            remaining = len(lines) - 3
-                            
-                            # Save full output
-                            filename = os.path.join(os.path.expanduser("~"), "resultado_comando.txt")
-                            try:
-                                with open(filename, 'w') as f:
-                                    f.write(output)
-                                
-                                speak_text = f"Salida: {preview}. Y {remaining} líneas más. Todo guardado en {filename}."
-                                self.bus.emit('speak', {'text': speak_text})
-                            except Exception as e:
-                                logger.error(f"Error saving log: {e}")
-                                self.bus.emit('speak', {'text': f"Salida: {preview}. Y más texto que no pude guardar."})
+                        speak_text = self.summarize_output(output, command)
+                        self.bus.emit('speak', {'text': speak_text})
                     else:
                         self.bus.emit('speak', {'text': "Error en la ejecución."})
                 else:
-                    self.bus.emit('speak', {'text': f"Entendido, orden: {command}. Pero no tengo módulo de administración."})
+                    self.bus.emit('speak', {'text': f"Entendido: {command}. Pero no tengo módulo de administración."})
                 
                 return
             else:
                  logger.info(f"Mango ignored input (Conf: {confidence}). Falling back to Gemma.")
+
+    def summarize_output(self, output, command):
+        """Generates a TTS-friendly summary of command output."""
+        output = output.strip()
+        lines = output.split('\n')
+        count = len(lines)
+        
+        # 1. Detect 'ls -l' style output (drwxr-xr-x ...)
+        if count > 0 and (lines[0].startswith('total ') or lines[0].startswith('drwx') or lines[0].startswith('-rw')):
+            # It's a file list
+            file_count = 0
+            dir_count = 0
+            files = []
+            
+            for line in lines:
+                if line.startswith('total '): continue
+                parts = line.split()
+                if len(parts) > 8:
+                    name = " ".join(parts[8:]) # Username/date etc are before this
+                    if line.startswith('d'):
+                        dir_count += 1
+                    else:
+                        file_count += 1
+                        files.append(name)
+            
+            total_items = file_count + dir_count
+            
+            if total_items > 5:
+                # Too many: Just count
+                msg = f"Se encontraron {total_items} elementos"
+                if dir_count > 0: msg += f", {dir_count} carpetas"
+                if file_count > 0: msg += f" y {file_count} archivos"
+                msg += "."
+                return msg
+            elif total_items > 0:
+                # Few: Read names
+                return f"Hay {total_items} elementos: {', '.join(files)}."
+            else:
+                return "El directorio está vacío."
+
+        # 2. General Output Handling
+        if len(output) < 300 and count <= 5:
+             # Short enough to read fully
+             return f"Salida: {output}"
+        else:
+             # Too long, read summary
+             preview = ". ".join(lines[:2]) # Read first 2 lines only
+             
+             # Save full output
+             filename = os.path.join(os.path.expanduser("~"), "resultado_comando.txt")
+             try:
+                 with open(filename, 'w') as f:
+                     f.write(output)
+                 return f"Salida extensa: {preview}. Resultado completo guardado en resultado_comando.txt."
+             except Exception:
+                 return f"Salida: {preview}. Y más texto."
 
         # 2. Fallback to Chat (Gemma)
         logger.info(f"Chatting with AI: {utterance}")
