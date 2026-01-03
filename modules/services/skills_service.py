@@ -322,6 +322,11 @@ class SkillsService:
                 if self.sysadmin_manager:
                     self.bus.emit('speak', {'text': "Ejecutando..."})
                     
+                    # Git Blocking (User Request)
+                    if command.strip().startswith("git "):
+                        self.bus.emit('speak', {'text': f"Mango sugiere el comando: {command}. Pero la ejecución de git está bloqueada."})
+                        return
+
                     # Security Check (Basic)
                     forbidden = ["rm ", "mkfs", "dd ", ">", "mv ", "shutdown", "reboot"]
                     if any(bad in command for bad in forbidden):
