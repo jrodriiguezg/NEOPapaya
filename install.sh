@@ -300,6 +300,7 @@ echo "Aplicando corrección para fann2..."
 $VENV_DIR/bin/python resources/tools/install_fann_fix.py
 
 $VENV_DIR/bin/pip install -r requirements.txt --no-cache-dir
+$VENV_DIR/bin/pip install Flask-WTF eventlet --no-cache-dir
 echo "Librerías de Python instaladas correctamente."
 echo ""
 
