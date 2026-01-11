@@ -18,18 +18,47 @@ else
     exit 1
 fi
 
-# 3. Descargar Socket.IO local
-echo "🌐 Descargando socket.io.min.js local..."
-mkdir -p "$STATIC_JS_DIR"
-wget -q -O "$STATIC_JS_DIR/socket.io.min.js" https://cdn.socket.io/4.7.2/socket.io.min.js
+# 5. Reiniciar servicio y limpiar procesos
+echo "🔪 Matando procesos Chromium antiguos (PID 1866, etc)..."
+killall -9 chromium chromium-browser 2>/dev/null
+rm -vf ~/.config/chromium/SingletonLock
 
-# 4. Ajustar permisos de .xinitrc (por si acaso)
-if [ -f ~/.xinitrc ]; then
-    chmod +x ~/.xinitrc
+echo "📝 Reescribiendo .xinitrc con limpieza automática..."
+cat << 'EOF' > ~/.xinitrc
+#!/bin/bash
+# Desactivar ahorro de energía
+xset -dpms
+xset s off
+xset s noblank
+
+# LIMPIEZA DE ARRANQUE (Nuclear)
+killall -9 chromium chromium-browser 2>/dev/null
+rm -f ~/.config/chromium/SingletonLock
+
+# Iniciar gestor de ventanas
+openbox &
+
+# Esperar a que el servidor Flask esté listo (puerto 5000)
+echo "Esperando a Neo Core inicie..."
+while ! curl -s http://localhost:5000 > /dev/null; do
+    sleep 2
+done
+
+# Detectar nombre del binario de Chromium
+CHROMIUM_BIN="chromium"
+if command -v chromium-browser &> /dev/null; then
+    CHROMIUM_BIN="chromium-browser"
 fi
 
-# 5. Reiniciar servicio
+# Bucle infinito para el navegador
+while true; do
+    $CHROMIUM_BIN --kiosk --no-first-run --disable-infobars --disable-session-crashed-bubble --disable-restore-session-state http://localhost:5000/face
+    sleep 2
+done
+EOF
+chmod +x ~/.xinitrc
+
 echo "🔄 Reiniciando servicio Neo..."
 systemctl --user restart neo.service
 
-echo "✅ Reparación completada. Verifica si la pantalla muestra la cara."
+echo "✅ Reparación completada. El bloqueo de Chromium debería haber desaparecido."
