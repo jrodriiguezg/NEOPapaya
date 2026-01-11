@@ -14,7 +14,73 @@ echo "Este script instalará todo lo necesario para ejecutar la aplicación en m
 echo "Se requerirá tu contraseña para instalar paquetes del sistema (sudo)."
 echo ""
 
-# --- 0. AUTO-UPDATE CHECK ---
+# --- 0. BOOTSTRAP / SELF-CLONE CHECK ---
+# Check if we are inside the git repo. If not, we need to clone it.
+if [ ! -d ".git" ]; then
+    echo "========================================="
+    echo "===   MODO BOOTSTRAP / AUTO-CLONE   ==="
+    echo "========================================="
+    echo "No se ha detectado un repositorio git en el directorio actual."
+    echo "Se procederá a descargar el código fuente..."
+    echo ""
+
+    # 1. Install Git if needed
+    if ! command -v git &> /dev/null; then
+        echo "Git no está instalado. Instalando git..."
+        if command -v apt-get &> /dev/null; then
+            sudo apt-get update && sudo apt-get install -y git
+        elif command -v dnf &> /dev/null; then
+            sudo dnf install -y git
+        else
+            echo "ERROR: No se pudo instalar git. Por favor instálalo manualmente."
+            exit 1
+        fi
+    fi
+
+    # 2. Define Install Directory
+    DEFAULT_DIR="$HOME/COLEGA"
+    echo "Directorio de instalación predeterminado: $DEFAULT_DIR"
+    read -p "¿Deseas instalar en otro lugar? (Deja vacío para usar predeterminado): " CUSTOM_DIR
+    
+    TARGET_DIR="${CUSTOM_DIR:-$DEFAULT_DIR}"
+    
+    # 3. Clone Repository
+    if [ -d "$TARGET_DIR" ]; then
+        if [ -z "$(ls -A $TARGET_DIR)" ]; then
+             echo "Directorio vacío detectado. Clonando..."
+             git clone https://github.com/jrodriiguezg/COLEGA.git "$TARGET_DIR"
+        else
+             echo "AVISO: El directorio $TARGET_DIR ya existe y no está vacío."
+             read -p "¿Continuar y tratar de actualizar/instalar ahí? (s/n): " CONT
+             if [[ ! "$CONT" =~ ^[Ss]$ ]]; then
+                 echo "Cancelando instalación."
+                 exit 0
+             fi
+             # If it's a git repo, we are good. If not, we might have issues.
+        fi
+    else
+        echo "Creando directorio $TARGET_DIR y clonando..."
+        git clone https://github.com/jrodriiguezg/COLEGA.git "$TARGET_DIR"
+    fi
+
+    # 4. Handover execution
+    echo ""
+    echo "Repositorio listo. Transfiriendo control al instalador del repositorio..."
+    echo "----------------------------------------------------------------"
+    
+    cd "$TARGET_DIR"
+    
+    # Make sure it's executable
+    chmod +x install.sh
+    
+    # Re-run the script from the new location with original arguments
+    exec ./install.sh "$@"
+    
+    # Should not reach here
+    exit 0
+fi
+
+# --- 0.1 AUTO-UPDATE CHECK (INSIDE REPO) ---
 echo "[PASO 0/5] Buscando actualizaciones..."
 if [ -d ".git" ] && command -v git &> /dev/null; then
     echo "Repositorio git detectado. Ejecutando git pull..."
