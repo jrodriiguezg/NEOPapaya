@@ -1080,7 +1080,7 @@ class NeoCore:
         # 1. Intent Manager (NLP)
         intent = self.intent_manager.find_best_intent(command_text)
         if intent and intent.get('score', 0) > 70:
-             app_logger.info(f"Intent detectado: {intent['intent']} ({intent['confidence']})")
+             app_logger.info(f"Intent detectado: {intent.get('name', 'Unknown')} ({intent.get('confidence', 'N/A')})")
              # Aquí iría la lógica de ejecución de intents, por ahora devolvemos respuesta simple o delegamos
              # En la versión refactorizada, NeoCore delegaba esto.
              # Para simplificar: si hay intent, podríamos mapearlo a una acción.
