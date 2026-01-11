@@ -54,7 +54,13 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 
 ### 🔧 Installation
 
-**Recommended Native Installation:**
+**Quick Install (One-line command):**
+
+```bash
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+```
+
+**Manual Installation:**
 
 ```bash
 # Clone the repository
@@ -121,7 +127,13 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 
 ### 🔧 Instalación
 
-**Instalación Nativa Recomendada:**
+**Instalación Rápida (Comando único):**
+
+```bash
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+```
+
+**Instalación Manual:**
 
 ```bash
 git clone https://github.com/jrodriiguezg/COLEGA.git
