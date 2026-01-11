@@ -85,7 +85,7 @@ def on_mic_status(message):
         pass
 
 bus.on('mic:status', on_mic_status)
-bus.connect()
+# bus.connect()  <-- Deadlock Fix: Let run_forever handle it in thread
 # Run bus in background thread
 import threading
 threading.Thread(target=bus.run_forever, daemon=True).start()

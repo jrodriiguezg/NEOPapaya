@@ -44,7 +44,7 @@ class VoiceManager:
         # --- BUS CLIENT ---
         self.bus = BusClient(name="VoiceManager")
         self.bus.on('recognizer_loop:audio', self.on_audio_data)
-        self.bus.connect()
+        # self.bus.connect() <-- Deadlock Fix: Let run_forever handle it in thread
         # Start bus thread
         threading.Thread(target=self.bus.run_forever, daemon=True).start()
         
