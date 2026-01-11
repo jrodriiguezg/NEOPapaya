@@ -98,9 +98,11 @@ class VoiceManager:
 
     def start_listening(self, intents=None):
         """Inicia el bucle de escucha en un hilo separado."""
+        vosk_logger.info(f"DEBUG: start_listening called. Intents: {bool(intents)}")
         self.is_listening = True
         self.listener_thread = threading.Thread(target=self._continuous_voice_listener, args=(intents,), daemon=True)
         self.listener_thread.start()
+        vosk_logger.info("DEBUG: listener_thread started.")
 
     def stop_listening(self):
         self.is_listening = False
@@ -141,6 +143,7 @@ class VoiceManager:
     def _continuous_voice_listener(self, intents):
         """Bucle principal de escucha de voz."""
         stt_engine = self.config_manager.get('stt', {}).get('engine', 'whisper') # Default to whisper now
+        vosk_logger.info(f"DEBUG: Listening thread running. Engine: {stt_engine}")
         
         if stt_engine == 'sherpa':
             self._sherpa_listener()
@@ -154,6 +157,7 @@ class VoiceManager:
             vosk_logger.error("Modelo Vosk no cargado. No se puede iniciar escucha.")
             return
 
+        vosk_logger.info("DEBUG: Vosk model present. initializing recognizer...")
         use_grammar = self.config_manager.get('stt', {}).get('use_grammar', True)
         
         if use_grammar and intents:
@@ -161,6 +165,8 @@ class VoiceManager:
             recognizer = vosk.KaldiRecognizer(self.vosk_model, 16000, grammar)
         else:
             recognizer = vosk.KaldiRecognizer(self.vosk_model, 16000)
+            
+        vosk_logger.info("DEBUG: Recognizer initialized. Starting PyAudio...")
             
         with no_alsa_error():
             p = pyaudio.PyAudio()
