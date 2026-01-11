@@ -1177,7 +1177,8 @@ def run_server():
     ssl_context = None
     if os.path.exists(cert_file) and os.path.exists(key_file):
         print(f"🔒 HTTPS Enabled. Using certs from {cert_dir}")
-        ssl_context = (cert_file, key_file)
+        # ssl_context = (cert_file, key_file) # Disabled for Kiosk compatibility
+        ssl_context = None 
     else:
         print("⚠️  HTTPS Disabled. Certs not found in config/certs/")
         
