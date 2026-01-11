@@ -18,10 +18,16 @@ else
     exit 1
 fi
 
-# 5. Reiniciar servicio y limpiar procesos
-echo "🔪 Matando procesos Chromium antiguos (PID 1866, etc)..."
+# 5. Reiniciar servicio y limpiar procesos (MODO NUCLEAR)
+echo "🔪 Matando TODOS los procesos de Chromium..."
+pkill -9 -f chromium
+pkill -9 -f chromium-browser
 killall -9 chromium chromium-browser 2>/dev/null
-rm -vf ~/.config/chromium/SingletonLock
+
+echo "🧹 Eliminando bloqueos y caché..."
+rm -rf ~/.config/chromium/Singleton*
+rm -rf ~/.cache/chromium
+rm -f ~/.config/chromium/Profile*/Singleton*
 
 echo "📝 Reescribiendo .xinitrc con limpieza automática..."
 cat << 'EOF' > ~/.xinitrc
@@ -32,8 +38,9 @@ xset s off
 xset s noblank
 
 # LIMPIEZA DE ARRANQUE (Nuclear)
-killall -9 chromium chromium-browser 2>/dev/null
-rm -f ~/.config/chromium/SingletonLock
+pkill -9 -f chromium
+rm -rf ~/.config/chromium/Singleton*
+rm -f ~/.config/chromium/Profile*/Singleton*
 
 # Iniciar gestor de ventanas
 openbox &

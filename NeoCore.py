@@ -429,6 +429,35 @@ class NeoCore:
                 if self.waiting_for_alarm_confirmation:
                     self.handle_alarm_confirmation(command_text)
                     return
+
+                if self.pending_mango_command:
+                    self.handle_mango_confirmation(command_text)
+                    return
+
+    def handle_mango_confirmation(self, text):
+        """Confirma o cancela un comando de sistema propuesto por Mango."""
+        command = self.pending_mango_command
+        self.pending_mango_command = None # Reset state
+
+        if any(w in text.lower() for w in ['sí', 'si', 'hazlo', 'dale', 'ejecuta', 'vale', 'ok']):
+            self.speak("Ejecutando.")
+            
+            # Execute command
+            try:
+                import subprocess
+                result = subprocess.run(command, shell=True, capture_output=True, text=True, timeout=30)
+                output = result.stdout.strip() or result.stderr.strip()
+                if output:
+                    # Limitar salida hablada
+                    spoken_output = output[:200]
+                    self.speak(f"Resultado: {spoken_output}")
+                else:
+                    self.speak("Comando terminado sin salida.")
+            except Exception as e:
+                self.speak(f"Error al ejecutar: {e}")
+                
+        else:
+            self.speak("Vale, cancelado.")
                 if self.pending_mango_command:
                     self.handle_mango_confirmation(command_text)
                     return
@@ -506,13 +535,23 @@ class NeoCore:
                     # List files in current directory (excluding hidden ones for noise reduction)
                     files_in_cwd = [f for f in os.listdir('.') if not f.startswith('.')]
                     # Limit list size to avoid token overflow
-                    if len(files_in_cwd) > 20: 
-                        files_in_cwd = files_in_cwd[:20] + ["..."]
-                except:
-                    files_in_cwd = []
-
-                # Construct Prompt
-                mango_prompt = f"Contexto: {files_in_cwd} | Instrucción: {command_text}"
+                # --- Context Optimization ---
+                # Exclude hidden files and common noise
+                raw_files = os.listdir('.')
+                ignored = {'.git', '__pycache__', 'venv', 'env', '.config', 'node_modules', '.gemini'}
+                
+                filtered_files = [
+                    f for f in raw_files 
+                    if f not in ignored and not f.startswith('.') 
+                    and not f.endswith(('.pyc', '.Log'))
+                ]
+                
+                # Truncate if too many files (Top 25)
+                if len(filtered_files) > 25:
+                    filtered_files = filtered_files[:25] + ['...']
+                    
+                context_str = str(filtered_files)
+                mango_prompt = f"Contexto: {context_str} | Instrucción: {command_text}"
                 
                 app_logger.info(f"MANGO Prompt (Simple): '{mango_prompt}'")
                 
