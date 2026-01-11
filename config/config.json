@@ -1,0 +1,22 @@
+{
+    "secret_key": "",
+    "stt": {
+        "engine": "vosk",
+        "input_device_index": null
+    },
+    "web_admin": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": false
+    },
+    "audio": {
+        "jack_no_start_server": "1",
+        "driver": "alsa"
+    },
+    "ai_model_path": "models/gemma-2b-it-q4_k_m.gguf",
+    "vision_enabled": true,
+    "experimental": {
+        "voice_auth_enabled": false
+    },
+    "admin_pass": "admin"
+}
