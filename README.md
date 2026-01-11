@@ -48,9 +48,7 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 * **NeoGuard**: IDS (Intrusion Detection System) that monitors logs (`auth.log`) and resources to detect brute-force attacks or anomalies.
 * **Auto-Diagnosis**: C.O.L.E.G.A. can read its own logs, find errors, and use AI to explain what is failing and how to fix it.
 
-#### 🎵 Multimedia
 
-* **Multi-Room Audio**: Support for casting audio to Google Cast devices. Ask it to play music on "All speakers" (Home Groups) or specific devices.
 
 ### 🔧 Installation
 
