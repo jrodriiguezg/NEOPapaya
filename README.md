@@ -11,7 +11,7 @@
 
 
 
-COLEGA is a proactive and modular personal assistant designed to run locally on modest hardware. It combines the efficiency of a rule-based system for system control and home automation with the intelligence of a local LLM (**Gemma 2B**) for natural conversations and reasoning.
+NEOPapaya is a proactive and modular personal assistant designed to run locally on modest hardware. It combines the efficiency of a rule-based system for system control and home automation with the intelligence of a local LLM (**Gemma 2B**) for natural conversations and reasoning.
 
 ![Status](https://img.shields.io/badge/Status-Beta-yellow)
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
@@ -45,8 +45,8 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 
 #### 🛡️ Security & Maintenance (Advanced)
 
-* **NeoGuard**: IDS (Intrusion Detection System) that monitors logs (`auth.log`) and resources to detect brute-force attacks or anomalies.
-* **Auto-Diagnosis**: C.O.L.E.G.A. can read its own logs, find errors, and use AI to explain what is failing and how to fix it.
+* **NEOPapayaGuard**: IDS (Intrusion Detection System) that monitors logs (`auth.log`) and resources to detect brute-force attacks or anomalies.
+* **Auto-Diagnosis**: NEOPapaya can read its own logs, find errors, and use AI to explain what is failing and how to fix it.
 
 
 
@@ -55,15 +55,15 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 **Quick Install (One-line command):**
 
 ```bash
-wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/NEOPapaya/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 **Manual Installation:**
 
 ```bash
 # Clone the repository
-git clone https://github.com/jrodriiguezg/COLEGA.git
-cd COLEGA
+git clone https://github.com/jrodriiguezg/NEOPapaya.git
+cd NEOPapaya
 
 # Run the installer
 ./install.sh
@@ -82,7 +82,7 @@ Access the Web Interface at `http://localhost:5000`.
 > **Estabilidad Beta**: Esta versión (v2.5.0) está en la rama `main` pero se considera **Experimental**. Aunque es funcional, puedes encontrar errores mientras pulimos la nueva arquitectura del Core V2,5. ¡Reporta fallos en GitHub!
 
 
-COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse localmente.
+NEOPapaya es un asistente personal proactivo y modular diseñado para ejecutarse localmente.
 
 ![Status](https://img.shields.io/badge/Status-Beta-yellow)
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
@@ -116,7 +116,7 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 
 #### 🛡️ Advanced Capabilities
 
-* **NeoGuard**: Monitor de seguridad en tiempo real.
+* **NEOPapayaGuard**: Monitor de seguridad en tiempo real.
 * **Auto-Diagnóstico**: Análisis de logs asistido por IA.
 * **Multi-Room**: Control de dispositivos Cast.
 
@@ -127,14 +127,14 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 **Instalación Rápida (Comando único):**
 
 ```bash
-wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/NEOPapaya/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 **Instalación Manual:**
 
 ```bash
-git clone https://github.com/jrodriiguezg/COLEGA.git
-cd COLEGA
+git clone https://github.com/jrodriiguezg/NEOPapaya.git
+cd NEOPapaya
 ./install.sh
 ```
 

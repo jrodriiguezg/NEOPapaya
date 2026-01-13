@@ -1,6 +1,6 @@
 # Registro de Cambios (Changelog)
 
-Todas las modificaciones notables en el proyecto **Neo Nano** se documentarán en este archivo.
+Todas las modificaciones notables en el proyecto **NEOPapaya** se documentarán en este archivo.
 
 El formato se basa en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a Versionado Semántico.
 
@@ -69,14 +69,14 @@ Actualización mayor de la interfaz web con un rediseño visual completo y nueva
 
 ### Nuevas Características
 
-- **Neo Web 2.1**:
+- **NEOPapaya Web 2.1**:
 - **Rediseño Visual**: Nuevo tema "Cosmic" con soporte nativo para **Modo Oscuro/Claro** y efectos Glassmorphism mejorados.
 - **Personalización CSS**: Editor integrado en Ajustes para inyectar CSS personalizado y modificar la apariencia del asistente.
 - **Mobile First**: Explorador de archivos y barra lateral optimizados para tablets y móviles.
 - **System Insights**:
 - Nueva pestaña **Información** en ajustes que muestra telemetría detallada: Versión del Kernel, Python, Commit de Git y versiones de librerías críticas.
 - **Update Manager**:
-- Nuevo botón **"Actualizar Neo"** en la sección Acciones.
+- Nuevo botón **"Actualizar NEOPapaya"** en la sección Acciones.
 - Endpoint `/api/update` que permite realizar `git pull` y reiniciar el servicio de usuario sin requerir privilegios de root (`sudo`).
 - **Dual Model Support (MANGO)**:
 - El instalador ahora permite elegir entre **MANGO** (Estable) y **MANGO2** (Experimental/Avanzado).
@@ -219,7 +219,7 @@ Esta versión introduce la personalidad **T.I.O.** (Tecnología Inteligente Oper
 
 ### ️ Personalidad & Voz
 
-- **Identidad T.I.O.**: Cambio de nombre de "Neo" a "Tío". Personalidad de "SysAdmin Colega" (informal, técnico, sarcástico).
+- **Identidad T.I.O.**: Cambio de nombre de "NEOPapaya" a "Tío". Personalidad de "SysAdmin Colega" (informal, técnico, sarcástico).
 - **Wake Word Difuso**: Detección de la palabra clave "Tío" en cualquier parte de la frase (inicio, medio, fin) usando `rapidfuzz`.
 - **Intents Proactivos**: El sistema puede iniciar conversaciones ("sorpresas") si detecta obsesiones o patrones repetitivos.
 
@@ -251,11 +251,11 @@ Esta versión representa una reescritura mayor del sistema, cambiando completame
 
 ### Añadido
 
-- **Neo Guard**: Sistema de detección de intrusiones (IDS) ligero. Monitorea logs (`auth.log`) y métricas (CPU, Red) para detectar ataques como Fuerza Bruta SSH, DDoS SYN Flood y anomalías de sistema.
-- **Neo Chat v2**: IA conversacional avanzada con soporte de contexto (memoria de conversación) y comprensión de lenguaje natural (typos, jerga) usando N-Grams.
-- **Módulo Neo NetSec**: Herramientas de red integradas (`nmap`, `ping`, `whois`) con análisis de seguridad básico.
-- **Neo Turbo**: Optimizaciones de rendimiento (RapidFuzz, TTS Cache, Gramática Dinámica).
-- **Neo Brain**: Sistema de memoria y aprendizaje (SQLite).
+- **NEOPapaya Guard**: Sistema de detección de intrusiones (IDS) ligero. Monitorea logs (`auth.log`) y métricas (CPU, Red) para detectar ataques como Fuerza Bruta SSH, DDoS SYN Flood y anomalías de sistema.
+- **NEOPapaya Chat v2**: IA conversacional avanzada con soporte de contexto (memoria de conversación) y comprensión de lenguaje natural (typos, jerga) usando N-Grams.
+- **Módulo NEOPapaya NetSec**: Herramientas de red integradas (`nmap`, `ping`, `whois`) con análisis de seguridad básico.
+- **NEOPapaya Turbo**: Optimizaciones de rendimiento (RapidFuzz, TTS Cache, Gramática Dinámica).
+- **NEOPapaya Brain**: Sistema de memoria y aprendizaje (SQLite).
 - **Módulo SysAdmin**: Nueva librería interna para monitorización de hardware (CPU, RAM, Disco) y gestión de procesos.
 - **Consola Web (Flask)**: Interfaz de administración completa accesible vía navegador (Puerto 5000).
 - Dashboard con métricas en tiempo real.
@@ -268,7 +268,7 @@ Esta versión representa una reescritura mayor del sistema, cambiando completame
 
 ### Cambiado
 
-- **Identidad**: El asistente ha sido renombrado de "Teo" a "**Neo**", y el proyecto de "OpenKompai" a "**Neo Nano**".
+- **Identidad**: El asistente ha sido renombrado de "Teo" a "**NEOPapaya**", y el proyecto de "NEOPapaya" a "**NEOPapaya**".
 - **Instalación**: Script `install.sh` actualizado con nuevas dependencias (`sqlite3`, `nmap`, `whois`, `rapidfuzz`).
 - **Arquitectura Headless**: Se ha eliminado toda dependencia de interfaz gráfica local. El sistema corre ahora como un servicio puro.
 - **Core Refactorizado**: `NeoCore.py` ahora implementa un sistema de hilos robusto para manejar Voz, Web y Eventos simultáneamente.

@@ -1,6 +1,6 @@
-# Guía de Instalación de Neo
+# Guía de Instalación de NEOPapaya
 
-Este documento detalla los diferentes métodos de instalación disponibles para el sistema Neo. El sistema ha sido diseñado para ser modular, permitiendo separar el núcleo de procesamiento de la interfaz de usuario.
+Este documento detalla los diferentes métodos de instalación disponibles para el sistema NEOPapaya. El sistema ha sido diseñado para ser modular, permitiendo separar el núcleo de procesamiento de la interfaz de usuario.
 > Este documento se encuentra desactualizado
 
 ## Requisitos Previos
