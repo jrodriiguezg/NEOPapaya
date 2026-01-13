@@ -55,15 +55,15 @@ COLEGA is a proactive and modular personal assistant designed to run locally on 
 **Quick Install (One-line command):**
 
 ```bash
-wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/NEOPapaya/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 **Manual Installation:**
 
 ```bash
 # Clone the repository
-git clone https://github.com/jrodriiguezg/COLEGA.git
-cd COLEGA
+git clone https://github.com/jrodriiguezg/NEOPapaya.git
+cd NEOPapaya
 
 # Run the installer
 ./install.sh
@@ -126,15 +126,19 @@ COLEGA es un asistente personal proactivo y modular diseñado para ejecutarse lo
 
 **Instalación Rápida (Comando único):**
 
+
 ```bash
-wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/COLEGA/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/NEOPapaya/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
-**Instalación Manual:**
+**Manual Installation:**
 
 ```bash
-git clone https://github.com/jrodriiguezg/COLEGA.git
-cd COLEGA
+# Clona el respositorio
+git clone https://github.com/jrodriiguezg/NEOPapaya.git
+cd NEOPapaya
+
+# Ejecuta el instalador
 ./install.sh
 ```
 
