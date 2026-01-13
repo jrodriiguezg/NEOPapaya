@@ -126,15 +126,24 @@ NEOPapaya es un asistente personal proactivo y modular diseñado para ejecutarse
 
 **Instalación Rápida (Comando único):**
 
+
 ```bash
 wget -O install.sh https://raw.githubusercontent.com/jrodriiguezg/NEOPapaya/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
-**Instalación Manual:**
+**Manual Installation:**
 
 ```bash
+<<<<<<< HEAD
 git clone https://github.com/jrodriiguezg/NEOPapaya.git
 cd NEOPapaya
+=======
+# Clona el respositorio
+git clone https://github.com/jrodriiguezg/NEOPapaya.git
+cd NEOPapaya
+
+# Ejecuta el instalador
+>>>>>>> 6c23f643ddc77386f3e72379cbb72cb6ad3ab76e
 ./install.sh
 ```
 
