@@ -7,7 +7,7 @@
 ## English
 
 > [!WARNING]
-> **Beta Stability**: This release (v2.5.0) is on the `main` branch but is considered **Experimental**. While feature-complete, you may encounter bugs or instability as we optimize the new Core V2.5 architecture. Report issues on GitHub!
+> **Beta Stability**:The next branch is only for security purpose
 
 **C.O.L.E.G.A.** (Language Copilot for Group and Administration Environments)
 
